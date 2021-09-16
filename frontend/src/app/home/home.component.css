@@ -1,0 +1,191 @@
+
+.largecarousel{
+    display:block;
+    position: relative;
+    overflow:hidden;
+    height: 360px;
+    
+}
+.largecarousel:hover{
+    transform: scale(1.1);
+}
+
+:focus{
+    outline:none;
+}
+
+::ng-deep  .carousel-control-prev{
+    width:60px;
+}
+::ng-deep  .carousel-control-next{
+    width:60px;
+}
+
+
+.sm_home::ng-deep  .carousel-control-prev{
+    width:20px;
+}
+.sm_home::ng-deep  .carousel-control-next{
+    width:20px;
+}
+
+.sm_other::ng-deep  .carousel-control-prev{
+    width:70px;
+}
+.sm_other::ng-deep  .carousel-control-next{
+    width:70px;
+}
+
+.largecarouseldiv{
+    color:rgba(255,255,255,0);
+    position: absolute;
+    left:0;
+    top:0;
+    width:100%;
+    height:100%;
+}
+.largecarouseldiv:hover{
+    color:rgba(255,255,255,1);
+    background:linear-gradient(to bottom, rgba(0,0,0,0.0), black 85%, black);
+}
+
+
+.largecarouseldivspan{
+    position: absolute;
+    bottom:60px;
+    left:150px;
+}
+
+.mytitle{
+    font-family: 'Open Sans', sans-serif;
+    font-size:40px;
+    color:white;
+    margin-top:20px;
+    margin-left:10%;
+    height: 80px;
+}
+
+.mycarouselcontainer{
+    width:1350px;
+    margin-left:auto;
+    margin-right:auto;
+}
+
+.mycarouselcard{
+    display:inline-block;
+    position: relative;
+    width:185px;
+    margin-top: 20px;
+    margin-left: 20px;
+}
+.mycarouselcard:hover{
+    transform: scale(1.1);
+}
+
+.mycarouseldiv{
+    color:rgba(255,255,255,0);
+    position: absolute;
+    left:0;
+    top:0;
+    width:100%;
+    height:100%;
+}
+.mycarouseldiv:hover{
+    color:rgba(255,255,255,1);
+    background:linear-gradient(to bottom, rgba(0,0,0,0.0), black 85%, black);
+}
+
+
+.mycarouseldivspan{
+    position: absolute;
+    bottom:20px;
+    left:20px;
+}
+
+.mycarouselimg{
+    width:185px;
+}
+
+
+.largecarousel_sm{
+    display:block;
+    position: relative;
+    overflow:hidden;
+    height: 170px;
+    
+}
+.largecarousel_sm:hover{
+    transform: scale(1.1);
+}
+
+
+.largecarouseldiv_sm{
+    color:rgba(255,255,255,1);
+    background:linear-gradient(to bottom, rgba(0,0,0,0.0), black 85%, black);
+    position: absolute;
+    left:0;
+    top:0;
+    width:100%;
+    height:100%;
+}
+
+.largecarouseldiv_sm:hover{
+    color:rgba(255,255,255,1);
+    transform: scale(1.1);
+}
+
+.largecarouseldivspan_sm{
+    position: absolute;
+    left:30px;
+    bottom:30px;
+}
+
+
+.mytitle_sm{
+    font-family: 'Noto Sans', sans-serif;
+    color:white;
+    margin-top:20px;
+    margin-left:60px;
+    margin-bottom:20px;
+    width:300px;
+    font-size:35px;
+}
+
+.mycarouselcard_sm{
+    display:inline-block;
+    position: relative;
+    width:270px;
+    margin-left: 73px;
+    margin-right: auto;
+
+}
+.mycarouselcard_sm:hover{
+    transform: scale(1.1);
+}
+
+.mycarouseldiv_sm{
+    color:rgba(255,255,255,1);
+    background:linear-gradient(to bottom, rgba(0,0,0,0.0), black 85%, black);
+    position: absolute;
+    left:0;
+    top:0;
+    width:100%;
+    height:100%;
+}
+
+
+.mycarouseldivspan_sm{
+    position: absolute;
+    bottom:20px;
+    left:20px;
+}
+
+.bottomDiv{
+    height:90px;
+    width:100%;
+    color:white;
+    text-align: center;
+    padding-top: 30px;
+    background:linear-gradient(to bottom, #050A30,50%,#000000);
+}
+

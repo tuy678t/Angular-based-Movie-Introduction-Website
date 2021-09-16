@@ -1,0 +1,556 @@
+<div class="d-none d-md-block">
+  <ngb-carousel *ngIf="carousel_resturn_list.length==5" style="width:1100px;margin-top:20px;margin-left: auto;margin-right: auto;" >
+    <ng-template ngbSlide *ngFor="let carousel_resturn_element of carousel_resturn_list">
+        <a class="largecarousel" [routerLink]="['/watch'+'/movie/'+carousel_resturn_element.id]">
+          <img class="largecarouselimg" width="1100px" [src]="carousel_resturn_element.backdrop_path">
+          <div class="largecarouseldiv">
+            <span class="largecarouseldivspan">{{carousel_resturn_element.title}}</span>
+          </div>
+  
+        </a>
+    </ng-template>
+  </ngb-carousel>
+
+  <div *ngIf="continue_watch_list.length==1">
+    <div class="mytitle">
+      Continue Watching
+    </div>
+    <div style="margin-left: auto;margin-right: auto;padding-left:150px;">
+      <a class="mycarouselcard" *ngFor="let continue_watch_element of continue_watch_list[0]" style="display:inline-block;" [routerLink]="['/watch'+'/'+continue_watch_element.media+'/'+continue_watch_element.id]">
+        <img class="mycarouselimg" [src]="continue_watch_element.poster_path">
+        <div class="mycarouseldiv">
+          <span class="mycarouseldivspan">
+            {{continue_watch_element.showname}}
+          </span>
+        </div>
+      </a>
+    </div>
+  </div>
+<div *ngIf="continue_watch_list.length>=2">
+  <div class="mytitle">
+    Continue Watching
+  </div>
+  <ngb-carousel class="mycarouselcontainer" *ngIf="continue_watch_list" style="height: 350px;" [interval]="0">
+    <ng-template ngbSlide *ngFor="let continue_watch_element of continue_watch_list">
+      <div style="margin-left: auto;margin-right: auto;">
+        <a class="mycarouselcard" *ngIf="continue_watch_element.length>=1" style="margin-left: 70px;" [routerLink]="['/watch'+'/'+continue_watch_element[0].media+'/'+continue_watch_element[0].id]">
+          <img class="mycarouselimg" [src]="continue_watch_element[0].poster_path">
+          <div class="mycarouseldiv">
+            <span class="mycarouseldivspan">
+              {{continue_watch_element[0].showname}}
+            </span>
+          </div>
+        </a>
+        <a class="mycarouselcard" *ngIf="continue_watch_element.length>=2" [routerLink]="['/watch'+'/'+continue_watch_element[1].media+'/'+continue_watch_element[1].id]">
+          <img class="mycarouselimg" [src]="continue_watch_element[1].poster_path">
+          <div class="mycarouseldiv">
+            <span class="mycarouseldivspan">
+              {{continue_watch_element[1].showname}}
+            </span>
+          </div>
+        </a>
+        <a class="mycarouselcard" *ngIf="continue_watch_element.length>=3" [routerLink]="['/watch'+'/'+continue_watch_element[2].media+'/'+continue_watch_element[2].id]">
+          <img class="mycarouselimg" [src]="continue_watch_element[2].poster_path">
+          <div class="mycarouseldiv">
+            <span class="mycarouseldivspan">
+              {{continue_watch_element[2].showname}}
+            </span>
+          </div>
+        </a>
+        <a class="mycarouselcard" *ngIf="continue_watch_element.length>=4" [routerLink]="['/watch'+'/'+continue_watch_element[3].media+'/'+continue_watch_element[3].id]">
+          <img class="mycarouselimg" [src]="continue_watch_element[3].poster_path">
+          <div class="mycarouseldiv">
+            <span class="mycarouseldivspan">
+              {{continue_watch_element[3].showname}}
+            </span>
+          </div>
+        </a>
+        <a class="mycarouselcard" *ngIf="continue_watch_element.length>=5" [routerLink]="['/watch'+'/'+continue_watch_element[4].media+'/'+continue_watch_element[4].id]">
+          <img class="mycarouselimg" [src]="continue_watch_element[4].poster_path">
+          <div class="mycarouseldiv">
+            <span class="mycarouseldivspan">
+              {{continue_watch_element[4].showname}}
+            </span>
+          </div>
+        </a>
+        <a class="mycarouselcard" *ngIf="continue_watch_element.length>=6" [routerLink]="['/watch'+'/'+continue_watch_element[5].media+'/'+continue_watch_element[5].id]">
+          <img class="mycarouselimg" [src]="continue_watch_element[5].poster_path">
+          <div class="mycarouseldiv">
+            <span class="mycarouseldivspan">
+              {{continue_watch_element[5].showname}}
+            </span>
+          </div>
+        </a>
+      </div>
+    </ng-template>
+  </ngb-carousel>
+</div>
+
+<div class="mytitle">
+  Popular Movies
+</div>
+<ngb-carousel class="mycarouselcontainer"  *ngIf="popular_movie_list" style="height: 350px;" [interval]="0">
+  <ng-template ngbSlide *ngFor="let popular_movie_element of popular_movie_list">
+    <div style="margin-left: auto;margin-right: auto;">
+      <a class="mycarouselcard" *ngIf="popular_movie_element.length>=1" style="margin-left: 70px;" [routerLink]="['/watch'+'/'+popular_movie_element[0].media+'/'+popular_movie_element[0].id]">
+        <img class="mycarouselimg" [src]="popular_movie_element[0].poster_path">
+        <div class="mycarouseldiv">
+          <span class="mycarouseldivspan">
+            {{popular_movie_element[0].showname}}
+          </span>
+        </div>
+      </a>
+      <a class="mycarouselcard" *ngIf="popular_movie_element.length>=2" [routerLink]="['/watch'+'/'+popular_movie_element[1].media+'/'+popular_movie_element[1].id]">
+        <img class="mycarouselimg" [src]="popular_movie_element[1].poster_path">
+        <div class="mycarouseldiv">
+          <span class="mycarouseldivspan">
+            {{popular_movie_element[1].showname}}
+          </span>
+        </div>
+      </a>
+      <a class="mycarouselcard" *ngIf="popular_movie_element.length>=3" [routerLink]="['/watch'+'/'+popular_movie_element[2].media+'/'+popular_movie_element[2].id]">
+        <img class="mycarouselimg" [src]="popular_movie_element[2].poster_path">
+        <div class="mycarouseldiv">
+          <span class="mycarouseldivspan">
+            {{popular_movie_element[2].showname}}
+          </span>
+        </div>
+      </a>
+      <a class="mycarouselcard" *ngIf="popular_movie_element.length>=4" [routerLink]="['/watch'+'/'+popular_movie_element[3].media+'/'+popular_movie_element[3].id]">
+        <img class="mycarouselimg" [src]="popular_movie_element[3].poster_path">
+        <div class="mycarouseldiv">
+          <span class="mycarouseldivspan">
+            {{popular_movie_element[3].showname}}
+          </span>
+        </div>
+      </a>
+      <a class="mycarouselcard" *ngIf="popular_movie_element.length>=5" [routerLink]="['/watch'+'/'+popular_movie_element[4].media+'/'+popular_movie_element[4].id]">
+        <img class="mycarouselimg" [src]="popular_movie_element[4].poster_path">
+        <div class="mycarouseldiv">
+          <span class="mycarouseldivspan">
+            {{popular_movie_element[4].showname}}
+          </span>
+        </div>
+      </a>
+      <a class="mycarouselcard" *ngIf="popular_movie_element.length>=6" [routerLink]="['/watch'+'/'+popular_movie_element[5].media+'/'+popular_movie_element[5].id]">
+        <img class="mycarouselimg" [src]="popular_movie_element[5].poster_path">
+        <div class="mycarouseldiv">
+          <span class="mycarouseldivspan">
+            {{popular_movie_element[5].showname}}
+          </span>
+        </div>
+      </a>
+    </div>
+  </ng-template>
+</ngb-carousel>
+
+
+<div class="mytitle">
+  Top Rated Movies
+</div>
+<ngb-carousel class="mycarouselcontainer" *ngIf="top_movie_list" style="height: 350px;" [interval]="0">
+  <ng-template ngbSlide *ngFor="let top_movie_element of top_movie_list">
+    <div style="margin-left: auto;margin-right: auto;">
+      <a class="mycarouselcard" *ngIf="top_movie_element.length>=1" style="margin-left: 70px;" [routerLink]="['/watch'+'/'+top_movie_element[0].media+'/'+top_movie_element[0].id]">
+        <img class="mycarouselimg" [src]="top_movie_element[0].poster_path">
+        <div class="mycarouseldiv">
+          <span class="mycarouseldivspan">
+            {{top_movie_element[0].showname}}
+          </span>
+        </div>
+      </a>
+      <a class="mycarouselcard" *ngIf="top_movie_element.length>=2" [routerLink]="['/watch'+'/'+top_movie_element[1].media+'/'+top_movie_element[1].id]">
+        <img class="mycarouselimg" [src]="top_movie_element[1].poster_path">
+        <div class="mycarouseldiv">
+          <span class="mycarouseldivspan">
+            {{top_movie_element[1].showname}}
+          </span>
+        </div>
+      </a>
+      <a class="mycarouselcard" *ngIf="top_movie_element.length>=3" [routerLink]="['/watch'+'/'+top_movie_element[2].media+'/'+top_movie_element[2].id]">
+        <img class="mycarouselimg" [src]="top_movie_element[2].poster_path">
+        <div class="mycarouseldiv">
+          <span class="mycarouseldivspan">
+            {{top_movie_element[2].showname}}
+          </span>
+        </div>
+      </a>
+      <a class="mycarouselcard" *ngIf="top_movie_element.length>=4" [routerLink]="['/watch'+'/'+top_movie_element[3].media+'/'+top_movie_element[3].id]">
+        <img class="mycarouselimg" [src]="top_movie_element[3].poster_path">
+        <div class="mycarouseldiv">
+          <span class="mycarouseldivspan">
+            {{top_movie_element[3].showname}}
+          </span>
+        </div>
+      </a>
+      <a class="mycarouselcard" *ngIf="top_movie_element.length>=5" [routerLink]="['/watch'+'/'+top_movie_element[4].media+'/'+top_movie_element[4].id]">
+        <img class="mycarouselimg" [src]="top_movie_element[4].poster_path">
+        <div class="mycarouseldiv">
+          <span class="mycarouseldivspan">
+            {{top_movie_element[4].showname}}
+          </span>
+        </div>
+      </a>
+      <a class="mycarouselcard" *ngIf="top_movie_element.length>=6" [routerLink]="['/watch'+'/'+top_movie_element[5].media+'/'+top_movie_element[5].id]">
+        <img class="mycarouselimg" [src]="top_movie_element[5].poster_path">
+        <div class="mycarouseldiv">
+          <span class="mycarouseldivspan">
+            {{top_movie_element[5].showname}}
+          </span>
+        </div>
+      </a>
+    </div>
+  </ng-template>
+</ngb-carousel>
+
+<div class="mytitle">
+  Trending Movies
+</div>
+<ngb-carousel class="mycarouselcontainer" *ngIf="trending_movie_list" style="height: 350px;" [interval]="0">
+  <ng-template ngbSlide *ngFor="let trending_movie_element of trending_movie_list">
+    <div style="margin-left: auto;margin-right: auto;">
+      <a class="mycarouselcard" *ngIf="trending_movie_element.length>=1" style="margin-left: 70px;" [routerLink]="['/watch'+'/'+trending_movie_element[0].media+'/'+trending_movie_element[0].id]">
+        <img class="mycarouselimg" [src]="trending_movie_element[0].poster_path">
+        <div class="mycarouseldiv">
+          <span class="mycarouseldivspan">
+            {{trending_movie_element[0].showname}}
+          </span>
+        </div>
+      </a>
+      <a class="mycarouselcard" *ngIf="trending_movie_element.length>=2" [routerLink]="['/watch'+'/'+trending_movie_element[1].media+'/'+trending_movie_element[1].id]">
+        <img class="mycarouselimg" [src]="trending_movie_element[1].poster_path">
+        <div class="mycarouseldiv">
+          <span class="mycarouseldivspan">
+            {{trending_movie_element[1].showname}}
+          </span>
+        </div>
+      </a>
+      <a class="mycarouselcard" *ngIf="trending_movie_element.length>=3" [routerLink]="['/watch'+'/'+trending_movie_element[2].media+'/'+trending_movie_element[2].id]">
+        <img class="mycarouselimg" [src]="trending_movie_element[2].poster_path">
+        <div class="mycarouseldiv">
+          <span class="mycarouseldivspan">
+            {{trending_movie_element[2].showname}}
+          </span>
+        </div>
+      </a>
+      <a class="mycarouselcard" *ngIf="trending_movie_element.length>=4" [routerLink]="['/watch'+'/'+trending_movie_element[3].media+'/'+trending_movie_element[3].id]">
+        <img class="mycarouselimg" [src]="trending_movie_element[3].poster_path">
+        <div class="mycarouseldiv">
+          <span class="mycarouseldivspan">
+            {{trending_movie_element[3].showname}}
+          </span>
+        </div>
+      </a>
+      <a class="mycarouselcard" *ngIf="trending_movie_element.length>=5" [routerLink]="['/watch'+'/'+trending_movie_element[4].media+'/'+trending_movie_element[4].id]">
+        <img class="mycarouselimg" [src]="trending_movie_element[4].poster_path">
+        <div class="mycarouseldiv">
+          <span class="mycarouseldivspan">
+            {{trending_movie_element[4].showname}}
+          </span>
+        </div>
+      </a>
+      <a class="mycarouselcard" *ngIf="trending_movie_element.length>=6" [routerLink]="['/watch'+'/'+trending_movie_element[5].media+'/'+trending_movie_element[5].id]">
+        <img class="mycarouselimg" [src]="trending_movie_element[5].poster_path">
+        <div class="mycarouseldiv">
+          <span class="mycarouseldivspan">
+            {{trending_movie_element[5].showname}}
+          </span>
+        </div>
+      </a>
+    </div>
+  </ng-template>
+</ngb-carousel>
+<div class="mytitle">
+  Popular TV Shows
+</div>
+<ngb-carousel class="mycarouselcontainer" *ngIf="popular_tv_list" style="height: 350px;" [interval]="0">
+  <ng-template ngbSlide *ngFor="let popular_tv_element of popular_tv_list">
+    <div style="margin-left: auto;margin-right: auto;">
+      <a class="mycarouselcard" *ngIf="popular_tv_element.length>=1" style="margin-left: 70px;" [routerLink]="['/watch'+'/'+popular_tv_element[0].media+'/'+popular_tv_element[0].id]">
+        <img class="mycarouselimg" [src]="popular_tv_element[0].poster_path">
+        <div class="mycarouseldiv">
+          <span class="mycarouseldivspan">
+            {{popular_tv_element[0].showname}}
+          </span>
+        </div>
+      </a>
+      <a class="mycarouselcard" *ngIf="popular_tv_element.length>=2" [routerLink]="['/watch'+'/'+popular_tv_element[1].media+'/'+popular_tv_element[1].id]">
+        <img class="mycarouselimg" [src]="popular_tv_element[1].poster_path">
+        <div class="mycarouseldiv">
+          <span class="mycarouseldivspan">
+            {{popular_tv_element[1].showname}}
+          </span>
+        </div>
+      </a>
+      <a class="mycarouselcard" *ngIf="popular_tv_element.length>=3" [routerLink]="['/watch'+'/'+popular_tv_element[2].media+'/'+popular_tv_element[2].id]">
+        <img class="mycarouselimg" [src]="popular_tv_element[2].poster_path">
+        <div class="mycarouseldiv">
+          <span class="mycarouseldivspan">
+            {{popular_tv_element[2].showname}}
+          </span>
+        </div>
+      </a>
+      <a class="mycarouselcard" *ngIf="popular_tv_element.length>=4" [routerLink]="['/watch'+'/'+popular_tv_element[3].media+'/'+popular_tv_element[3].id]">
+        <img class="mycarouselimg" [src]="popular_tv_element[3].poster_path">
+        <div class="mycarouseldiv">
+          <span class="mycarouseldivspan">
+            {{popular_tv_element[3].showname}}
+          </span>
+        </div>
+      </a>
+      <a class="mycarouselcard" *ngIf="popular_tv_element.length>=5" [routerLink]="['/watch'+'/'+popular_tv_element[4].media+'/'+popular_tv_element[4].id]">
+        <img class="mycarouselimg" [src]="popular_tv_element[4].poster_path">
+        <div class="mycarouseldiv">
+          <span class="mycarouseldivspan">
+            {{popular_tv_element[4].showname}}
+          </span>
+        </div>
+      </a>
+      <a class="mycarouselcard" *ngIf="popular_tv_element.length>=6" [routerLink]="['/watch'+'/'+popular_tv_element[5].media+'/'+popular_tv_element[5].id]">
+        <img class="mycarouselimg" [src]="popular_tv_element[5].poster_path">
+        <div class="mycarouseldiv">
+          <span class="mycarouseldivspan">
+            {{popular_tv_element[5].showname}}
+          </span>
+        </div>
+      </a>
+    </div>
+  </ng-template>
+</ngb-carousel>
+<div class="mytitle">
+  Top Rated TV Shows
+</div>
+<ngb-carousel class="mycarouselcontainer" *ngIf="top_tv_list" style="height: 350px;" [interval]="0">
+  <ng-template ngbSlide *ngFor="let top_tv_element of top_tv_list">
+    <div style="margin-left: auto;margin-right: auto;">
+      <a class="mycarouselcard" *ngIf="top_tv_element.length>=1" style="margin-left: 70px;" [routerLink]="['/watch'+'/'+top_tv_element[0].media+'/'+top_tv_element[0].id]">
+        <img class="mycarouselimg" [src]="top_tv_element[0].poster_path">
+        <div class="mycarouseldiv">
+          <span class="mycarouseldivspan">
+            {{top_tv_element[0].showname}}
+          </span>
+        </div>
+      </a>
+      <a class="mycarouselcard" *ngIf="top_tv_element.length>=2" [routerLink]="['/watch'+'/'+top_tv_element[1].media+'/'+top_tv_element[1].id]">
+        <img class="mycarouselimg" [src]="top_tv_element[1].poster_path">
+        <div class="mycarouseldiv">
+          <span class="mycarouseldivspan">
+            {{top_tv_element[1].showname}}
+          </span>
+        </div>
+      </a>
+      <a class="mycarouselcard" *ngIf="top_tv_element.length>=3" [routerLink]="['/watch'+'/'+top_tv_element[2].media+'/'+top_tv_element[2].id]">
+        <img class="mycarouselimg" [src]="top_tv_element[2].poster_path">
+        <div class="mycarouseldiv">
+          <span class="mycarouseldivspan">
+            {{top_tv_element[2].showname}}
+          </span>
+        </div>
+      </a>
+      <a class="mycarouselcard" *ngIf="top_tv_element.length>=4" [routerLink]="['/watch'+'/'+top_tv_element[3].media+'/'+top_tv_element[3].id]">
+        <img class="mycarouselimg" [src]="top_tv_element[3].poster_path">
+        <div class="mycarouseldiv">
+          <span class="mycarouseldivspan">
+            {{top_tv_element[3].showname}}
+          </span>
+        </div>
+      </a>
+      <a class="mycarouselcard" *ngIf="top_tv_element.length>=5" [routerLink]="['/watch'+'/'+top_tv_element[4].media+'/'+top_tv_element[4].id]">
+        <img class="mycarouselimg" [src]="top_tv_element[4].poster_path">
+        <div class="mycarouseldiv">
+          <span class="mycarouseldivspan">
+            {{top_tv_element[4].showname}}
+          </span>
+        </div>
+      </a>
+      <a class="mycarouselcard" *ngIf="top_tv_element.length>=6" [routerLink]="['/watch'+'/'+top_tv_element[5].media+'/'+top_tv_element[5].id]">
+        <img class="mycarouselimg" [src]="top_tv_element[5].poster_path">
+        <div class="mycarouseldiv">
+          <span class="mycarouseldivspan">
+            {{top_tv_element[5].showname}}
+          </span>
+        </div>
+      </a>
+    </div>
+  </ng-template>
+</ngb-carousel>
+<div class="mytitle">
+  Trending TV Shows
+</div>
+<ngb-carousel class="mycarouselcontainer" *ngIf="trending_tv_list" style="height: 350px;" [interval]="0">
+  <ng-template ngbSlide *ngFor="let trending_tv_element of trending_tv_list">
+    <div style="margin-left: auto;margin-right: auto;">
+      <a class="mycarouselcard" *ngIf="trending_tv_element.length>=1" style="margin-left: 70px;" [routerLink]="['/watch'+'/'+trending_tv_element[0].media+'/'+trending_tv_element[0].id]">
+        <img class="mycarouselimg" [src]="trending_tv_element[0].poster_path">
+        <div class="mycarouseldiv">
+          <span class="mycarouseldivspan">
+            {{trending_tv_element[0].showname}}
+          </span>
+        </div>
+      </a>
+      <a class="mycarouselcard" *ngIf="trending_tv_element.length>=2" [routerLink]="['/watch'+'/'+trending_tv_element[1].media+'/'+trending_tv_element[1].id]">
+        <img class="mycarouselimg" [src]="trending_tv_element[1].poster_path">
+        <div class="mycarouseldiv">
+          <span class="mycarouseldivspan">
+            {{trending_tv_element[1].showname}}
+          </span>
+        </div>
+      </a>
+      <a class="mycarouselcard" *ngIf="trending_tv_element.length>=3" [routerLink]="['/watch'+'/'+trending_tv_element[2].media+'/'+trending_tv_element[2].id]">
+        <img class="mycarouselimg" [src]="trending_tv_element[2].poster_path">
+        <div class="mycarouseldiv">
+          <span class="mycarouseldivspan">
+            {{trending_tv_element[2].showname}}
+          </span>
+        </div>
+      </a>
+      <a class="mycarouselcard" *ngIf="trending_tv_element.length>=4" [routerLink]="['/watch'+'/'+trending_tv_element[3].media+'/'+trending_tv_element[3].id]">
+        <img class="mycarouselimg" [src]="trending_tv_element[3].poster_path">
+        <div class="mycarouseldiv">
+          <span class="mycarouseldivspan">
+            {{trending_tv_element[3].showname}}
+          </span>
+        </div>
+      </a>
+      <a class="mycarouselcard" *ngIf="trending_tv_element.length>=5" [routerLink]="['/watch'+'/'+trending_tv_element[4].media+'/'+trending_tv_element[4].id]">
+        <img class="mycarouselimg" [src]="trending_tv_element[4].poster_path">
+        <div class="mycarouseldiv">
+          <span class="mycarouseldivspan">
+            {{trending_tv_element[4].showname}}
+          </span>
+        </div>
+      </a>
+      <a class="mycarouselcard" *ngIf="trending_tv_element.length>=6" [routerLink]="['/watch'+'/'+trending_tv_element[5].media+'/'+trending_tv_element[5].id]">
+        <img class="mycarouselimg" [src]="trending_tv_element[5].poster_path">
+        <div class="mycarouseldiv">
+          <span class="mycarouseldivspan">
+            {{trending_tv_element[5].showname}}
+          </span>
+        </div>
+      </a>
+    </div>
+  </ng-template>
+</ngb-carousel>
+</div>
+
+<div class="d-md-none sm_home">
+  <ngb-carousel *ngIf="carousel_resturn_list.length==5" style="width:320px;margin-top:20px;margin-left: auto;margin-right: auto;" [showNavigationIndicators]=false>
+    <ng-template ngbSlide *ngFor="let carousel_resturn_element of carousel_resturn_list">
+        <a class="largecarousel_sm" [routerLink]="['/watch'+'/movie/'+carousel_resturn_element.id]">
+          <img class="largecarouselimg_sm" width="320px" [src]="carousel_resturn_element.backdrop_path">
+          <div class="largecarouseldiv_sm">
+            <span class="largecarouseldivspan_sm">{{carousel_resturn_element.title}}</span>
+          </div>
+        </a>
+    </ng-template>
+  </ngb-carousel> 
+
+
+  <div *ngIf="continue_watch_list.length>=1">
+    <div class="mytitle_sm">
+      Continue Watching
+    </div>
+    <ngb-carousel class="sm_other" style="height: 430px;" [interval]="0" [showNavigationIndicators]=false>
+      <ng-template ngbSlide *ngFor="let element of continue_watch_list_sm">
+          <a class="mycarouselcard_sm" [routerLink]="['/watch'+'/'+element.media+'/'+element.id]">
+            <img style="width:270px;margin-top:10px;" [src]="element.poster_path">
+            <div class="mycarouseldiv_sm">
+              <span class="mycarouseldivspan_sm">
+                {{element.showname}}
+              </span>
+            </div>
+          </a>
+      </ng-template>
+    </ngb-carousel>
+  </div>
+  <div class="mytitle_sm">
+    Popular Movies
+  </div>
+  <ngb-carousel class="sm_other" style="height: 430px;" [interval]="0" [showNavigationIndicators]=false>
+    <ng-template ngbSlide *ngFor="let element of popular_movie_list_sm">
+        <a class="mycarouselcard_sm" [routerLink]="['/watch'+'/'+element.media+'/'+element.id]">
+          <img style="width:270px;margin-top:10px;" [src]="element.poster_path">
+          <div class="mycarouseldiv_sm">
+            <span class="mycarouseldivspan_sm">
+              {{element.showname}}
+            </span>
+          </div>
+        </a>
+    </ng-template>
+  </ngb-carousel>
+  <div class="mytitle_sm">
+    Top Rated Movies
+  </div>
+  <ngb-carousel class="sm_other" style="height: 430px;" [interval]="0" [showNavigationIndicators]=false>
+    <ng-template ngbSlide *ngFor="let element of top_movie_list_sm">
+        <a class="mycarouselcard_sm" [routerLink]="['/watch'+'/'+element.media+'/'+element.id]">
+          <img style="width:270px;margin-top:10px;" [src]="element.poster_path">
+          <div class="mycarouseldiv_sm">
+            <span class="mycarouseldivspan_sm">
+              {{element.showname}}
+            </span>
+          </div>
+        </a>
+    </ng-template>
+  </ngb-carousel>
+  <div class="mytitle_sm">
+    Trending Movies
+  </div>
+  <ngb-carousel class="sm_other" style="height: 430px;" [interval]="0" [showNavigationIndicators]=false>
+    <ng-template ngbSlide *ngFor="let element of trending_movie_list_sm">
+        <a class="mycarouselcard_sm" [routerLink]="['/watch'+'/'+element.media+'/'+element.id]">
+          <img style="width:270px;margin-top:10px;" [src]="element.poster_path">
+          <div class="mycarouseldiv_sm">
+            <span class="mycarouseldivspan_sm">
+              {{element.showname}}
+            </span>
+          </div>
+        </a>
+    </ng-template>
+  </ngb-carousel>
+  <div class="mytitle_sm">
+    Popular TV Shows
+  </div>
+  <ngb-carousel class="sm_other" style="height: 430px;" [interval]="0" [showNavigationIndicators]=false>
+    <ng-template ngbSlide *ngFor="let element of popular_tv_list_sm">
+        <a class="mycarouselcard_sm" [routerLink]="['/watch'+'/'+element.media+'/'+element.id]">
+          <img style="width:270px;margin-top:10px;" [src]="element.poster_path">
+          <div class="mycarouseldiv_sm">
+            <span class="mycarouseldivspan_sm">
+              {{element.showname}}
+            </span>
+          </div>
+        </a>
+    </ng-template>
+  </ngb-carousel>
+  <div class="mytitle_sm">
+    Top Rated TV Shows
+  </div>
+  <ngb-carousel class="sm_other" style="height: 430px;" [interval]="0" [showNavigationIndicators]=false>
+    <ng-template ngbSlide *ngFor="let element of top_tv_list_sm">
+        <a class="mycarouselcard_sm" [routerLink]="['/watch'+'/'+element.media+'/'+element.id]">
+          <img style="width:270px;margin-top:10px;" [src]="element.poster_path">
+          <div class="mycarouseldiv_sm">
+            <span class="mycarouseldivspan_sm">
+              {{element.showname}}
+            </span>
+          </div>
+        </a>
+    </ng-template>
+  </ngb-carousel>
+  <div class="mytitle_sm">
+    Trending TV Shows
+  </div>
+  <ngb-carousel class="sm_other" style="height: 430px;" [interval]="0" [showNavigationIndicators]=false>
+    <ng-template ngbSlide *ngFor="let element of trending_tv_list_sm">
+        <a class="mycarouselcard_sm" [routerLink]="['/watch'+'/'+element.media+'/'+element.id]">
+          <img style="width:270px;margin-top:10px;" [src]="element.poster_path">
+          <div class="mycarouseldiv_sm">
+            <span class="mycarouseldivspan_sm">
+              {{element.showname}}
+            </span>
+          </div>
+        </a>
+    </ng-template>
+  </ngb-carousel>
+</div>

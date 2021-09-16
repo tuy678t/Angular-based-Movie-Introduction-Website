@@ -1,0 +1,368 @@
+<div class="largeDiv d-none d-md-block">
+
+<div id="youTube" *ngIf="videos_json!={}">
+<youtube-player [videoId]=videos_json.key height="402px" width="720px">
+</youtube-player>
+</div>
+
+<div id="rightDiv" *ngIf="details_json!={}">
+  <div class="showName">{{details_json.showname}}</div>
+  <div class="tagLine">{{details_json.tagline}}</div><br>
+  <div class="others">{{details_json.date}}&nbsp;|&nbsp;&#9733;&nbsp;{{details_json.vote_average}}&nbsp;|&nbsp;{{details_json.runtime}}</div>
+  <div class="genres"><span style="font-weight: 600px;">Genres</span>:&nbsp;<span style="color:rgb(180,180,180)">{{details_json.genres}}</span></div>
+  <div class="languages"><span style="font-weight: 600px;">Spoken Languages</span>:&nbsp;<span style="color:rgb(180,180,180)">{{details_json.spoken_languages}}</span></div>
+  <div class="add" (click)="clickOnButton()">{{watch_list_string}}</div><br>
+  <ngb-alert #selfClosingAlert *ngIf="watch_list_alert_string" [type]=watch_list_alert_type (closed)="watch_list_alert_string = ''" style="margin-top:10px">{{ watch_list_alert_string }}</ngb-alert>
+</div>
+
+<div id="DescrShare" *ngIf="details_json!={}&&videos_json!={}">
+  <span style="font-size:20px;">Description</span>
+  <p style="color:rgb(180,180,180);font-size:18px;margin-top:10px;">{{details_json.overview}}</p><br>
+  <span style="font-size:20px;">Share</span>
+  <div style="margin-top: 8px;">
+  <a class="fa fa-twitter alogo"
+  target="_blank"
+  href="https://twitter.com/intent/tweet?text=Watch%20{{details_json.showname}}%0ahttps://www.youtube.com/watch?v={{videos_json.key}}%0a%23USC%20%23CSCI571%20%23FightOn"></a>
+  &nbsp;&nbsp;
+  <a class="fa fa-facebook alogo"
+  target="_blank"
+  href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fwww.youtube.com/watch?v={{videos_json.key}}"></a>
+</div>
+</div>
+
+
+<div id="Casts" *ngIf="casts_loaded">
+  <h1 style="font-weight: 600;">Full Cast and Crew</h1>
+  <div class="castCards">
+    <div class="card" *ngFor="let casts_element of casts_list" (click)="openModal(mymodal,casts_element.id,casts_element.profile_path)">
+        <img class="card-img-top" style="width: 165px;" src={{casts_element.profile_path}}>
+        <div class="card-body" style="padding-top:10px;padding-bottom: 10px;">
+          <span style="font-weight:900;">{{casts_element.name}}<br>
+          AS<br></span>
+          <span class="card_character">
+            {{casts_element.character}}
+          </span>
+          
+        </div>
+    </div>
+  </div>
+</div>
+
+<div id="Reviews" style="margin-top: 40px;" *ngIf="reviews_loaded">
+  <h1 style="font-weight: 600;">Reviews <span style="color:rgb(180,180,180);">{{reviews_length}}</span></h1>
+  <div id="reviewCards" style="color: black;">
+    <div class="card rcard" style="display: block;background-color: white;height: 280px;margin-top: 10px;" *ngFor="let reviews_element of reviews_list">
+      <div class="reviewerpart">
+        <div class="reviewer">
+          <img class="card-img-left" style="height: 100%;width:100%" src="{{reviews_element.avatar_path}}">
+        </div>
+      </div>
+      <div class="card-body" style="display: inline-block;margin-left:200px;width:800px;text-align: left;padding-top: 20px;padding-bottom: 20px;">
+        <div style="display: inline-block; vertical-align: top;"><h4><span style="font-weight: 600;">A review created by {{reviews_element.author}}</span></h4></div><div class="reviewStar"><span style="font-weight: 900; font-size:20px">&nbsp;&nbsp;&#9733;</span>{{reviews_element.rating}}</div><br><br>
+        <p style="color:rgb(180,180,180);">Writen by {{reviews_element.author}} on {{reviews_element.created_at|date: 'MMMM d, y, h:mm:ss a':'PDT'}}</p>
+        <p class="reviewContent">{{reviews_element.content}}</p>
+        <a style="text-decoration: underline;color:darkslateblue" href="{{reviews_element.url}}" target="_blank">Read the rest</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div *ngIf="recommended_list.length!=0" >
+<h1 style="margin-top: 60px;margin-left:20px;font-weight: 600;">Recommended {{this.title_string}}</h1>
+<ngb-carousel style="height: 300px;" [interval]="0">
+  
+  <ng-template ngbSlide *ngFor="let element of recommended_list">
+    <div style="margin-left: auto;margin-right: auto;">
+      <a class="mycarouselcard" *ngIf="element.length>=1" style="margin-left: 55px;" [routerLink]="['/watch'+'/'+element[0].media+'/'+element[0].id]">
+        <img class="mycarouselimage" [src]="element[0].poster_path">
+        <div class="mycarouseldiv">
+          <span class="mycarouseldivspan">
+            {{element[0].showname}}
+          </span>
+        </div>
+      </a>
+      <a class="mycarouselcard" *ngIf="element.length>=2" [routerLink]="['/watch'+'/'+element[1].media+'/'+element[1].id]">
+        <img class="mycarouselimage" [src]="element[1].poster_path">
+        <div class="mycarouseldiv">
+          <span class="mycarouseldivspan">
+            {{element[1].showname}}
+          </span>
+        </div>
+      </a>
+      <a class="mycarouselcard" *ngIf="element.length>=3" [routerLink]="['/watch'+'/'+element[2].media+'/'+element[2].id]">
+        <img class="mycarouselimage" [src]="element[2].poster_path">
+        <div class="mycarouseldiv">
+          <span class="mycarouseldivspan">
+            {{element[2].showname}}
+          </span>
+        </div>
+      </a>
+      <a class="mycarouselcard" *ngIf="element.length>=4" [routerLink]="['/watch'+'/'+element[3].media+'/'+element[3].id]">
+        <img class="mycarouselimage" [src]="element[3].poster_path">
+        <div class="mycarouseldiv">
+          <span class="mycarouseldivspan">
+            {{element[3].showname}}
+          </span>
+        </div>
+      </a>
+      <a class="mycarouselcard" *ngIf="element.length>=5" [routerLink]="['/watch'+'/'+element[4].media+'/'+element[4].id]">
+        <img class="mycarouselimage" [src]="element[4].poster_path">
+        <div class="mycarouseldiv">
+          <span class="mycarouseldivspan">
+            {{element[4].showname}}
+          </span>
+        </div>
+      </a>
+      <a class="mycarouselcard" *ngIf="element.length>=6" [routerLink]="['/watch'+'/'+element[5].media+'/'+element[5].id]">
+        <img class="mycarouselimage" [src]="element[5].poster_path">
+        <div class="mycarouseldiv">
+          <span class="mycarouseldivspan">
+            {{element[5].showname}}
+          </span>
+        </div>
+      </a>
+    </div>
+  </ng-template>
+</ngb-carousel>
+</div>
+
+<div *ngIf="similar_list.length!=0">
+  <h1 style="margin-top: 60px;margin-left:20px;font-weight: 600;">Similar {{this.title_string}}</h1>
+<ngb-carousel *ngIf="similar_list.length!=0" style="height: 300px;" [interval]="0">
+
+  <ng-template ngbSlide *ngFor="let element of similar_list">
+    <div style="margin-left: auto;margin-right: auto; ">
+      <a class="mycarouselcard" *ngIf="element.length>=1" style="margin-left: 55px;" [routerLink]="['/watch'+'/'+element[0].media+'/'+element[0].id]">
+        <img class="mycarouselimage" [src]="element[0].poster_path">
+        <div class="mycarouseldiv">
+          <span class="mycarouseldivspan">
+            {{element[0].showname}}
+          </span>
+        </div>
+      </a>
+      <a class="mycarouselcard" *ngIf="element.length>=2" [routerLink]="['/watch'+'/'+element[1].media+'/'+element[1].id]">
+        <img class="mycarouselimage" [src]="element[1].poster_path">
+        <div class="mycarouseldiv">
+          <span class="mycarouseldivspan">
+            {{element[1].showname}}
+          </span>
+        </div>
+      </a>
+      <a class="mycarouselcard" *ngIf="element.length>=3" [routerLink]="['/watch'+'/'+element[2].media+'/'+element[2].id]">
+        <img class="mycarouselimage" [src]="element[2].poster_path">
+        <div class="mycarouseldiv">
+          <span class="mycarouseldivspan">
+            {{element[2].showname}}
+          </span>
+        </div>
+      </a>
+      <a class="mycarouselcard" *ngIf="element.length>=4" [routerLink]="['/watch'+'/'+element[3].media+'/'+element[3].id]">
+        <img class="mycarouselimage" [src]="element[3].poster_path">
+        <div class="mycarouseldiv">
+          <span class="mycarouseldivspan">
+            {{element[3].showname}}
+          </span>
+        </div>
+      </a>
+      <a class="mycarouselcard" *ngIf="element.length>=5" [routerLink]="['/watch'+'/'+element[4].media+'/'+element[4].id]">
+        <img class="mycarouselimage" [src]="element[4].poster_path">
+        <div class="mycarouseldiv">
+          <span class="mycarouseldivspan">
+            {{element[4].showname}}
+          </span>
+        </div>
+      </a>
+      <a class="mycarouselcard" *ngIf="element.length>=6" [routerLink]="['/watch'+'/'+element[5].media+'/'+element[5].id]">
+        <img class="mycarouselimage" [src]="element[5].poster_path">
+        <div class="mycarouseldiv">
+          <span class="mycarouseldivspan">
+            {{element[5].showname}}
+          </span>
+        </div>
+      </a>
+    </div>
+  </ng-template>
+</ngb-carousel>
+</div>
+
+<ng-template #tipContent1>Visit IMDB</ng-template>
+<ng-template #tipContent2>Visit Instagram</ng-template>
+<ng-template #tipContent3>Visit Facebook</ng-template>
+<ng-template #tipContent4>Visit Twitter</ng-template>
+
+
+<ng-template #mymodal let-modal>
+    <div style="color:black;font-size:15px;" class="modal-header">
+      <h4 class="modal-title" id="modal-basic-title">{{cast_details.name}}</h4>
+      <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div style="color:black;font-size:15px;" class="modal-body">
+      <img style="margin-top:0px;vertical-align: top;" src="{{cast_details.poster_path}}" width=185px;>
+      <div style="display: inline-block;margin-left: 20px;margin-top:0px;width:calc(100% - 260px)">
+        <div *ngIf="cast_details.birthday!=null">Birth: {{cast_details.birthday}}</div>
+        <div *ngIf="cast_details.place_of_birth!=null">Birth Place: {{cast_details.place_of_birth}}</div>
+        <div *ngIf="cast_details.gender!=null">Gender: {{cast_details.gender}}</div>
+        <div *ngIf="cast_details.homepage!=null">Website: <a href="{{cast_details.homepage}}" target="_blank">{{cast_details.homepage}}</a></div>
+        <div *ngIf="cast_details.known_for_department!=null">Known for: {{cast_details.known_for_department}}</div>
+        <div *ngIf="cast_details.also_known_as!=null">Also Known as: {{cast_details.also_known_as}}</div><br>
+        <a *ngIf="cast_details2.imdb!=null" href="{{cast_details2.imdb}}" target="_blank" [ngbTooltip]="tipContent1" class="fab fa-imdb alogo"></a>
+        <span *ngIf="cast_details2.imdb!=null">&nbsp;</span>
+        <a *ngIf="cast_details2.instagram!=null" href="{{cast_details2.instagram}}" target="_blank" [ngbTooltip]="tipContent2" class="fab fa-instagram alogo"></a>
+        <span *ngIf="cast_details2.instagram!=null">&nbsp;</span>
+        <a *ngIf="cast_details2.facebook!=null" href="{{cast_details2.facebook}}" target="_blank" [ngbTooltip]="tipContent3" class="fab fa-facebook-square alogo"></a>
+        <span *ngIf="cast_details2.facebook!=null">&nbsp;</span>
+        <a *ngIf="cast_details2.twitter!=null" href="{{cast_details2.twitter}}" target="_blank" [ngbTooltip]="tipContent4" class="fab fa-twitter alogo"></a>
+      </div>
+      <div *ngIf="cast_details.biography!=null">
+        <h3 style="margin-top:10px;height:40px;">Biography</h3>
+        <p>{{cast_details.biography}}</p>
+      </div>
+    </div>
+</ng-template>
+
+<ng-template #tipContent5>Visit IMDB</ng-template>
+<ng-template #tipContent6>Visit Instagram</ng-template>
+<ng-template #tipContent7>Visit Facebook</ng-template>
+<ng-template #tipContent8>Visit Twitter</ng-template>
+
+
+
+<ng-template #mymodalsm let-modal>
+    <div style="color:black;font-family: sans-serif;" class="modal-header">
+      <h4 class="modal-title" id="modal-basic-title">{{cast_details.name}}</h4>
+      <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div style="color:black;font-family: sans-serif;" class="modal-body">
+      <img style="margin-top:0px;margin-left: auto;margin-right: auto;" src="{{cast_details.poster_path}}" width=360px;>
+      <div style="margin-top:5px;position: relative;">
+        <div *ngIf="cast_details.birthday!=null">Birth: {{cast_details.birthday}}</div>
+        <div *ngIf="cast_details.place_of_birth!=null">Birth Place: {{cast_details.place_of_birth}}</div>
+        <div *ngIf="cast_details.gender!=null">Gender: {{cast_details.gender}}</div>
+        <div *ngIf="cast_details.homepage!=null">Website: <a href="{{cast_details.homepage}}" target="_blank">{{cast_details.homepage}}</a></div>
+        <div *ngIf="cast_details.known_for_department!=null">Known for: {{cast_details.known_for_department}}</div>
+        <div *ngIf="cast_details.also_known_as!=null">Also Known as: {{cast_details.also_known_as}}</div><br>
+        <a *ngIf="cast_details2.imdb!=null" href="{{cast_details2.imdb}}" target="_blank" placement="right" ngbPopover="Visit IMDB" triggers="mouseenter:mouseleave" class="fab fa-imdb alogo"></a>
+        <span *ngIf="cast_details2.imdb!=null">&nbsp;</span>
+        <a *ngIf="cast_details2.instagram!=null" href="{{cast_details2.instagram}}" target="_blank" ngbPopover="Visit Instagram" triggers="mouseenter:mouseleave" class="fab fa-instagram alogo" ></a>
+        <span *ngIf="cast_details2.instagram!=null">&nbsp;</span>
+        <a *ngIf="cast_details2.facebook!=null" href="{{cast_details2.facebook}}" target="_blank" ngbPopover="Visit Facebook" triggers="mouseenter:mouseleave" class="fab fa-facebook-square alogo"></a>
+        <span *ngIf="cast_details2.facebook!=null">&nbsp;</span>
+        <a *ngIf="cast_details2.twitter!=null" href="{{cast_details2.twitter}}" target="_blank" ngbPopover="Visit Twitter" triggers="mouseenter:mouseleave" class="fab fa-twitter alogo"></a>
+      </div>
+      <div *ngIf="cast_details.biography!=null">
+        <h3 style="margin-top:10px;height:40px;font-weight: bold;">Biography</h3>
+        <p>{{cast_details.biography}}</p>
+      </div>
+    </div>
+</ng-template>
+
+</div>
+
+<div class="smallDiv d-md-none">
+
+
+
+  <div id="youTube_sm" *ngIf="videos_json!={}">
+    <youtube-player [videoId]=videos_json.key height="201px" width="360px">
+    </youtube-player>
+  </div>
+  <div style="font-family:sans-serif;" *ngIf="details_json!={}">
+    <div class="showName">{{details_json.showname}}</div>
+    <div class="tagLine" style="color:white">{{details_json.tagline}}</div><br>
+    <div class="others" style="color:white">{{details_json.date}}&nbsp;|&nbsp;&#9733;&nbsp;{{details_json.vote_average}}&nbsp;|&nbsp;{{details_json.runtime}}</div>
+    <div class="genres" style="color:white">Genres:&nbsp;<span style="color:rgb(180,180,180)">{{details_json.genres}}</span></div>
+    <div class="languages" style="color:white">Spoken Languages:&nbsp;<span style="color:rgb(180,180,180)">{{details_json.spoken_languages}}</span></div>
+    <div class="add" (click)="clickOnButton()">{{watch_list_string}}</div><br>
+    <ngb-alert #selfClosingAlert *ngIf="watch_list_alert_string" [type]=watch_list_alert_type (closed)="watch_list_alert_string = ''" style="margin-top:10px">{{ watch_list_alert_string }}</ngb-alert>
+    <div style="margin-top:20px;" *ngIf="details_json!={}&&videos_json!={}">
+      <span style="font-size:20px;">Description</span>
+      <p style="color:rgb(180,180,180);font-size:18px;margin-top:10px;">{{details_json.overview}}</p>
+      <span style="font-size:20px;">Share</span>
+      <div style="margin-top: 8px;">
+      <a class="fa fa-twitter alogo"
+      target="_blank"
+      href="https://twitter.com/intent/tweet?text=Watch%20{{details_json.showname}}%0ahttps://www.youtube.com/watch?v={{videos_json.key}}%0a%23USC%20%23CSCI571%20%23FightOn"></a>
+      &nbsp;&nbsp;
+      <a class="fa fa-facebook alogo"
+      target="_blank"
+      href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fwww.youtube.com/watch?v={{videos_json.key}}"></a>
+      </div>
+    </div>
+  </div>
+  <div id="Casts" *ngIf="casts_loaded">
+    <h1>Full Cast and Crew</h1>
+    <div class="castCards">
+      <div class="card" *ngFor="let casts_element of casts_list" (click)="openModal(mymodalsm,casts_element.id,casts_element.profile_path)">
+          <img class="card-img-top" style="width: 165px;" src={{casts_element.profile_path}}>
+          <div class="card-body" style="padding-top:10px;padding-bottom: 10px;">
+            <span style="font-weight:900;">{{casts_element.name}}<br>
+            AS<br></span>
+            <span class="card_character">
+              {{casts_element.character}}
+            </span>
+            
+          </div>
+      </div>
+    </div>
+  </div>
+  
+<div id="Reviews" style="font-family: sans-serif;" *ngIf="reviews_loaded">
+  <h1 style="margin-left: 20px;margin-top: 20px;margin-bottom: 10px;">Reviews <span style="color:rgb(180,180,180);">{{reviews_length}}</span></h1>
+  <div id="reviewCards_sm" style="color: black;margin-left: 20px;">
+    <div class="card rcard" style="display: block;background-color: white;height: 460px;margin-top: 10px;" *ngFor="let reviews_element of reviews_list">
+      <div class="reviewerpart_sm">
+        <div class="reviewer">
+          <img class="card-img-top" style="height: 100%;width:100%" src="{{reviews_element.avatar_path}}">
+        </div>
+      </div>
+      <div class="card-body" style="text-align: left;padding-top: 20px;padding-left:20px;width:320px;padding-bottom: 20px;">
+        <div><h4><b>A review created by {{reviews_element.author}}</b></h4></div>
+        <div class="reviewStar_sm"><span style="font-weight: bold; font-size:20px">&nbsp;&nbsp;&#9733;</span>{{reviews_element.rating}}</div><br>
+        <p style="color:rgb(180,180,180);">Writen by {{reviews_element.author}} on {{reviews_element.created_at|date: 'MMMM d, y, h:mm:ss a':'PDT'}}</p>
+        <p class="reviewContent">{{reviews_element.content}}</p>
+        <a style="text-decoration: underline;color:darkslateblue" href="{{reviews_element.url}}" target="_blank">Read the rest</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div style="margin-top: 80px;" *ngIf="recommended_list_sm.length!=0">
+<h1 style="margin-left: 20px;margin-top: 20px;margin-bottom: 10px;">Recommended {{this.title_string}}</h1>
+<ngb-carousel *ngIf="recommended_loaded" style="height: 360px;" [interval]="0" [showNavigationIndicators]=false>
+  <ng-template ngbSlide *ngFor="let element of recommended_list_sm">
+    <div style="margin-left: auto;margin-right: auto;">
+      <a class="mycarouselcard" style="margin-left: 60px;width:240px" [routerLink]="['/watch'+'/'+element.media+'/'+element.id]">
+        <img class="mycarouselimage" style="width:240px;"[src]="element.poster_path">
+        <div class="mycarouseldiv_sm">
+          <span class="mycarouseldivspan_sm">
+            {{element.showname}}
+          </span>
+        </div>
+      </a>
+    </div>
+  </ng-template>
+</ngb-carousel>
+</div>
+
+<div style="margin-top: 80px;" *ngIf="similar_list_sm.length!=0">
+  <h1 style="margin-left: 20px;margin-top: 20px;margin-bottom: 10px;">Similar {{this.title_string}}</h1>
+  <ngb-carousel *ngIf="similar_loaded" style="height: 360px;" [interval]="0" [showNavigationIndicators]=false>
+    <ng-template ngbSlide *ngFor="let element of similar_list_sm">
+      <div style="margin-left: auto;margin-right: auto;">
+        <a class="mycarouselcard" style="margin-left: 60px;width:240px" [routerLink]="['/watch'+'/'+element.media+'/'+element.id]">
+          <img class="mycarouselimage" style="width:240px;"[src]="element.poster_path">
+          <div class="mycarouseldiv_sm">
+            <span class="mycarouseldivspan_sm">
+              {{element.showname}}
+            </span>
+          </div>
+        </a>
+      </div>
+    </ng-template>
+  </ngb-carousel>
+</div>
+</div>
